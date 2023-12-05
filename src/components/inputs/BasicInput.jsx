@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Input } from "@material-tailwind/react";
+// import { Input } from "@material-tailwind/react";
 
 const BasicInput = ({ label, setter, propName, initialState, type = "text", id }) => {
   const handleChangeInput = (e, setter, propName, initialState) => {
@@ -7,12 +7,10 @@ const BasicInput = ({ label, setter, propName, initialState, type = "text", id }
   };
 
   return (
-    <Input
+    <input
       id={id}
       type={type}
       label={label}
-      color="blue"
-      crossOrigin={"true"}
       onChange={(e) => handleChangeInput(e, setter, propName, initialState)}
     />
   );
