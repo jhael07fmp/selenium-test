@@ -1,0 +1,21 @@
+.session-card__container {
+  @apply border border-gray-200 rounded-lg p-4 h-[26rem] sm:h-fit sm:my-4 sm:pb-10  
+  w-[22rem] lg:w-96 shadow-sm bg-white;
+}
+
+.session-car__title {
+  @apply w-full text-center mt-8 text-2xl;
+}
+
+.session-card__form {
+  @apply mt-10 grid gap-y-8 w-11/12 md:w-10/12 mx-auto;
+}
+
+.session-card__button {
+  @apply bg-blue-500 text-white p-2 rounded-md active:bg-blue-600  outline-none
+  active:scale-95 transition-all;
+}
+
+.session-card__info-bellow-button {
+  @apply text-sm font-medium w-fit mx-auto text-gray-500 underline;
+}
