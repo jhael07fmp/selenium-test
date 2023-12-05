@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const useRegister = () => {
   const [newUser, setNewUser] = useState({});
@@ -23,31 +24,37 @@ export const useRegister = () => {
 
   const handleOnSubmit = () => {
     if (!newUser.name) {
-      alert("Full name is required");
+      Swal.fire("Error", "Full name is required", "error");
       return;
     }
 
     if (!newUser.username) {
-      alert("Username is required");
+      Swal.fire("Error", "Username is required", "error");
       return;
     }
 
     if (!newUser.password) {
-      alert("Password is required");
+      Swal.fire("Error", "Password is required", "error");
       return;
     }
 
     if (!passwordRegex.test(newUser.password)) {
-      alert(
-        "Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long."
+      Swal.fire(
+        "Error",
+        "Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long.",
+        "error"
       );
       return;
     }
 
     addUser(newUser);
     localStorage.setItem("activeUser", JSON.stringify(newUser));
-    alert("User successfully created");
-    navigate("/home");
+
+    Swal.fire("Success", "User successfully created", "success");
+
+    setTimeout(() => {
+      navigate("/home");
+    }, 2000);
   };
 
   return { inputs, handleOnSubmit };

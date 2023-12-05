@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const useLogin = () => {
   const [credentials, setCredentials] = useState({});
@@ -27,12 +28,12 @@ export const useLogin = () => {
 
   const handleSubmit = () => {
     if (!credentials.username) {
-      alert("Username is required");
+      Swal.fire("Error", "Username is required", "error");
       return;
     }
 
     if (!credentials.password) {
-      alert("Password is required");
+      Swal.fire("Error", "Password is required", "error");
       return;
     }
 
@@ -43,7 +44,7 @@ export const useLogin = () => {
     const userExist = users?.find(isValidUser);
 
     if (!userExist) {
-      alert("Username or password invalid");
+      Swal.fire("Error", "Username or password invalid", "error");
       return;
     }
 
