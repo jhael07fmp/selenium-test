@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useRegister = () => {
   const [newUser, setNewUser] = useState({});
-  const { addUser, activeUser } = useLocalStorage();
+  const { addUser, activeUser, addActiveUser } = useLocalStorage();
 
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ export const useRegister = () => {
     }
 
     addUser(newUser);
-
+    addActiveUser(newUser);
     alert("User successfully created");
     navigate("/home");
   };

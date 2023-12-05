@@ -8,7 +8,5 @@ export const useSession = (credentials) => {
 
   const userExist = users?.find((user) => isValidUser(user, credentials));
 
-  console.log(userExist);
-
   return { userExist };
 };
