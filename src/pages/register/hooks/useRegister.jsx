@@ -17,9 +17,9 @@ export const useRegister = () => {
   };
 
   const inputs = [
-    { ...defaultValues, label: "Full Name", propName: "name" },
-    { ...defaultValues, label: "Username", propName: "username" },
-    { ...defaultValues, label: "Password", type: "password", propName: "password" },
+    { ...defaultValues, label: "Full Name", propName: "name", id: "name" },
+    { ...defaultValues, label: "Username", propName: "username", id: "username" },
+    { ...defaultValues, label: "Password", type: "password", propName: "password", id: "password" },
   ];
 
   const handleOnSubmit = () => {
