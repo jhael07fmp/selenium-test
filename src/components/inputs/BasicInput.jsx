@@ -6,7 +6,6 @@ const BasicInput = ({ label, setter, propName, initialState, type = "text" }) =>
     setter({ ...initialState, [propName]: e.target.value });
   };
 
-  console.log(initialState);
   return (
     <Input
       type={type}
