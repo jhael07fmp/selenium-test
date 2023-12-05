@@ -1,0 +1,7 @@
+.home__container {
+  @apply w-11/12 border rounded-md p-10 mx-auto mt-4 border-gray-300;
+}
+
+.home_greeting {
+  @apply bg-blue-500 text-white p-1 px-2 rounded-md;
+}

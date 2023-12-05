@@ -13,6 +13,7 @@ export const useLogin = () => {
       initialState: credentials,
       propName: "username",
       setter: setCredentials,
+      id: "username",
     },
     {
       label: "Password",
@@ -20,6 +21,7 @@ export const useLogin = () => {
       propName: "password",
       setter: setCredentials,
       type: "password",
+      id: "password",
     },
   ];
 

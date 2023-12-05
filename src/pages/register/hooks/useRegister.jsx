@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
 
 export const useRegister = () => {
   const [newUser, setNewUser] = useState({});
-  const { addUser, activeUser, addActiveUser } = useLocalStorage();
 
+  const { addUser } = useLocalStorage();
   const navigate = useNavigate();
+
+  const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-.]).{8,}$/;
 
   const defaultValues = {
     setter: setNewUser,
@@ -35,16 +37,18 @@ export const useRegister = () => {
       return;
     }
 
-    addActiveUser(newUser);
+    if (!passwordRegex.test(newUser.password)) {
+      alert(
+        "Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long."
+      );
+      return;
+    }
+
     addUser(newUser);
+    localStorage.setItem("activeUser", JSON.stringify(newUser));
     alert("User successfully created");
     navigate("/home");
   };
-
-  useEffect(() => {
-    if (activeUser) navigate("/home");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeUser, localStorage.getItem("activeUser")]);
 
   return { inputs, handleOnSubmit };
 };

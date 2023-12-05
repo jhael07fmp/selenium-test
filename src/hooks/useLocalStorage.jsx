@@ -8,16 +8,15 @@ export const useLocalStorage = () => {
   const activeUser = JSON.parse(localStorage.getItem("activeUser"));
 
   const addActiveUser = (user) => {
-    if (!users) {
-      alert("klk");
-      localStorage.setItem("activeUser", JSON.stringify(user));
-    }
-
     const findUser = users?.find(
       (u) =>
         u.username.toLowerCase() === user.username.toLowerCase() && u.password === user.password
     );
 
+    if (Array.isArray(users) == false) {
+      alert("klk");
+      localStorage.setItem("activeUser", JSON.stringify(findUser));
+    }
     if (findUser) localStorage.setItem("activeUser", JSON.stringify(findUser));
   };
 
