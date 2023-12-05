@@ -41,7 +41,7 @@ export const useRegister = () => {
     if (!passwordRegex.test(newUser.password)) {
       Swal.fire(
         "Error",
-        "Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long.",
+        "Password must contain at least one lowercase letter, one uppercase letter, one number, one special character and be at least 8 characters long.",
         "error"
       );
       return;

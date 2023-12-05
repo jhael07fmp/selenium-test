@@ -1,8 +1,20 @@
-// import { Builder } from "selenium-webdriver";
+import { Builder, By, Key } from "selenium-webdriver";
 
-// const example = async () => {
-//   // launch the browser
-//   let driver = await new Builder().forBrowser("chrome").build();
+let driver = await new Builder().forBrowser("chrome").build();
 
-//   // navigate to our applica
-// };
+const ErrorIfUsernameIsMissing = async () => {
+  await driver.get("https://selenium-test.vercel.app/");
+
+  await driver.findElement(By.id("username")).sendKeys("");
+  await driver.findElement(By.className("session-card__button")).click();
+  const response = await driver.findElement(By.id("swal2-html-container")).getText();
+
+  if (response === "Password is required") console.log("Test Passed!");
+  else console.log("Test Failed!");
+
+  setTimeout(async () => {
+    await driver.quit();
+  }, 5000);
+};
+
+ErrorIfUsernameIsMissing();
