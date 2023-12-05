@@ -1,4 +1,4 @@
-import { Builder, By, Key } from "selenium-webdriver";
+import { Builder, By } from "selenium-webdriver";
 
 let driver = await new Builder().forBrowser("chrome").build();
 
