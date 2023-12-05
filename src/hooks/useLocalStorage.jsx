@@ -8,7 +8,10 @@ export const useLocalStorage = () => {
   const activeUser = JSON.parse(localStorage.getItem("activeUser"));
 
   const addActiveUser = (user) => {
-    if (!users) return localStorage.setItem("activeUser", JSON.stringify(user));
+    if (!users) {
+      alert("klk");
+      localStorage.setItem("activeUser", JSON.stringify(user));
+    }
 
     const findUser = users?.find(
       (u) =>
@@ -18,5 +21,7 @@ export const useLocalStorage = () => {
     if (findUser) localStorage.setItem("activeUser", JSON.stringify(findUser));
   };
 
-  return { users, addUser, addActiveUser, activeUser };
+  const removeActiveUser = () => localStorage.removeItem("activeUser");
+
+  return { users, addUser, addActiveUser, activeUser, removeActiveUser };
 };

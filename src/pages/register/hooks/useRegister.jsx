@@ -35,8 +35,8 @@ export const useRegister = () => {
       return;
     }
 
-    addUser(newUser);
     addActiveUser(newUser);
+    addUser(newUser);
     alert("User successfully created");
     navigate("/home");
   };
@@ -44,7 +44,7 @@ export const useRegister = () => {
   useEffect(() => {
     if (activeUser) navigate("/home");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeUser]);
+  }, [activeUser, localStorage.getItem("activeUser")]);
 
   return { inputs, handleOnSubmit };
 };
