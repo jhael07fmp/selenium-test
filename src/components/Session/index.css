@@ -8,7 +8,7 @@
 }
 
 .session-card__form {
-  @apply mt-10 grid gap-y-8 w-11/12 md:w-10/12 mx-auto;
+  @apply mt-10 grid gap-y-6 w-11/12 md:w-10/12 mx-auto;
 }
 
 .session-card__button {

@@ -15,7 +15,9 @@ const executeTests = async () => {
   } catch (err) {
     console.log("Error", err);
   } finally {
-    await driver.quit();
+    setTimeout(async () => {
+      await driver.quit();
+    }, 5000);
   }
 };
 
@@ -23,7 +25,9 @@ const executeTests = async () => {
 const errorIfUsernameIsMissing = async (driver) => {
   try {
     await driver.findElement(By.id("username")).sendKeys("", Key.RETURN);
-    const result = await driver.findElement(By.id("swal2-html-container")).getText();
+    const result = await driver
+      .findElement(By.id("swal2-html-container"))
+      .getText();
 
     if (result === "Username is required") console.log("Username Test Passed!");
     else console.log("Username Test Failed!");
@@ -37,7 +41,9 @@ const errorIfPasswordIsMissing = async (driver) => {
   try {
     await driver.findElement(By.id("username")).sendKeys("user");
     await driver.findElement(By.id("password")).sendKeys("", Key.RETURN);
-    const result = await driver.findElement(By.id("swal2-html-container")).getText();
+    const result = await driver
+      .findElement(By.id("swal2-html-container"))
+      .getText();
 
     if (result === "Password is required") console.log("Password Test Passed!");
     else console.log("Password Test Failed!");
@@ -50,9 +56,12 @@ const errorIfPasswordIsMissing = async (driver) => {
 const errorIfFullNameIsMissing = async (driver) => {
   try {
     await driver.findElement(By.id("name")).sendKeys("", Key.RETURN);
-    const result = await driver.findElement(By.id("swal2-html-container")).getText();
+    const result = await driver
+      .findElement(By.id("swal2-html-container"))
+      .getText();
 
-    if (result === "Full name is required") console.log("Name in register Test Passed!");
+    if (result === "Full name is required")
+      console.log("Name in register Test Passed!");
     else console.log("Name in register Test Failed!");
   } catch (err) {
     console.log("Error in username test", err);
