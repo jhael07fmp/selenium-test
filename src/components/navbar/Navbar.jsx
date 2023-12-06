@@ -18,7 +18,11 @@ const Navbar = () => {
         TESTING APP
       </h2>
 
-      <button className="flex gap-2 text-white items-center mr-4" onClick={handleClick}>
+      <button
+        className="flex gap-2 text-white items-center mr-4"
+        id="logout-btn"
+        onClick={handleClick}
+      >
         <FiLogOut className="text-xl" />
         <h3 className="text-white text-sm">Logout</h3>
       </button>

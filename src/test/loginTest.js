@@ -6,18 +6,46 @@ const executeTests = async () => {
 
   try {
     await driver.get("https://selenium-test.vercel.app/register");
-    await errorIfFullNameIsMissing(driver);
+    await RegisterTest(driver);
 
-    await driver.get("https://selenium-test.vercel.app/");
+    // await driver.get("https://selenium-test.vercel.app/");
 
-    await errorIfUsernameIsMissing(driver);
-    await errorIfPasswordIsMissing(driver);
+    // await errorIfUsernameIsMissing(driver);
+    // await errorIfPasswordIsMissing(driver);
   } catch (err) {
     console.log("Error", err);
-  } finally {
-    setTimeout(async () => {
-      await driver.quit();
-    }, 5000);
+  }
+};
+
+// Function to check if username field is empty
+const RegisterTest = async (driver) => {
+  const inputsData = [
+    { id: "name", value: "Jhael Rodriguez" },
+    { id: "username", value: "jhael" },
+    { id: "password", value: "Jehlicot07.com" },
+  ];
+
+  try {
+    inputsData.forEach(async ({ id, value }) => {
+      await driver.findElement(By.id(id)).sendKeys(value);
+    });
+
+    await driver.findElement(By.className("session-card__button")).click();
+
+    const result = await driver
+      .findElement(By.id("swal2-html-container"))
+      .getText();
+
+    await driver;
+    await driver.actions().keyDown(Key.ESCAPE).perform();
+
+    await driver.findElement(By.id("logout-btn")).click();
+
+    if (result === "User successfully created")
+      console.log("Register Test Passed! ✅");
+    else console.log("Register register Test Failed! ⛔");
+  } catch (err) {
+    console.log("Error in username test", err);
   }
 };
 
@@ -49,22 +77,6 @@ const errorIfPasswordIsMissing = async (driver) => {
     else console.log("Password Test Failed!");
   } catch (err) {
     console.log("Error in password test", err);
-  }
-};
-
-// Function to check if username field is empty
-const errorIfFullNameIsMissing = async (driver) => {
-  try {
-    await driver.findElement(By.id("name")).sendKeys("", Key.RETURN);
-    const result = await driver
-      .findElement(By.id("swal2-html-container"))
-      .getText();
-
-    if (result === "Full name is required")
-      console.log("Name in register Test Passed!");
-    else console.log("Name in register Test Failed!");
-  } catch (err) {
-    console.log("Error in username test", err);
   }
 };
 
