@@ -6,7 +6,7 @@ const executeTests = async () => {
 
   try {
     await driver.get("https://selenium-test.vercel.app/register");
-    await errorIfFullNameIsMissing(driver);
+    await RegisterTest(driver);
 
     await driver.get("https://selenium-test.vercel.app/");
 
@@ -14,8 +14,35 @@ const executeTests = async () => {
     await errorIfPasswordIsMissing(driver);
   } catch (err) {
     console.log("Error", err);
-  } finally {
-    await driver.quit();
+  }
+};
+
+// Function to check if username field is empty
+const RegisterTest = async (driver) => {
+  const inputsData = [
+    { id: "name", value: "Jhael Rodriguez" },
+    { id: "username", value: "jhael" },
+    { id: "password", value: "Jehlicot07.com" },
+  ];
+
+  try {
+    inputsData.forEach(async ({ id, value }) => {
+      await driver.findElement(By.id(id)).sendKeys(value);
+    });
+
+    await driver.findElement(By.className("session-card__button")).click();
+
+    const result = await driver.findElement(By.id("swal2-html-container")).getText();
+
+    await driver;
+    await driver.actions().keyDown(Key.ESCAPE).perform();
+
+    await driver.findElement(By.id("logout-btn")).click();
+
+    if (result === "User successfully created") console.log("Register Test Passed! ✅");
+    else console.log("Register register Test Failed! ⛔");
+  } catch (err) {
+    console.log("Error in username test", err);
   }
 };
 
@@ -45,20 +72,5 @@ const errorIfPasswordIsMissing = async (driver) => {
     console.log("Error in password test", err);
   }
 };
-
-// Function to check if username field is empty
-const errorIfFullNameIsMissing = async (driver) => {
-  const inputs = ["name", "username", "password"];
-  try {
-    await driver.findElement(By.id("name")).sendKeys("", Key.RETURN);
-    const result = await driver.findElement(By.id("swal2-html-container")).getText();
-
-    if (result === "Full name is required") console.log("Name in register Test Passed!");
-    else console.log("Name in register Test Failed!");
-  } catch (err) {
-    console.log("Error in username test", err);
-  }
-};
-
 // Execute all tests
 executeTests();
