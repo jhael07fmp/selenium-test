@@ -48,6 +48,7 @@ const errorIfPasswordIsMissing = async (driver) => {
 
 // Function to check if username field is empty
 const errorIfFullNameIsMissing = async (driver) => {
+  const inputs = ["name", "username", "password"];
   try {
     await driver.findElement(By.id("name")).sendKeys("", Key.RETURN);
     const result = await driver.findElement(By.id("swal2-html-container")).getText();
